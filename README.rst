@@ -1,7 +1,12 @@
 Welcome To DStore
 #################
 
-DStore (DataStore) is a Python Object Relational Mapper (ORM) that allows easy description of data models.
+Build State
+.. image:: https://travis-ci.org/MarkLark/flask-dstore.svg?branch=master
+    :target: https://travis-ci.org/MarkLark/flask-dstore
+
+Flask-DStore is a Web API and Javascript Client.
+The API routes, logic and client code is automatically generated for you.
 
 
 Installing
@@ -13,7 +18,7 @@ This means that all you have to do to install PyMan is run the following in a co
 
 .. code-block:: console
 
-    $ pip install dstore
+    $ pip install dstore-flask
 
 Minimal Example
 ===============
