@@ -24,7 +24,8 @@ setup(
     install_requires=[
         'Flask>=0.7',
         'dstore',
-        'dstore-acl'
+        'dstore-acl',
+        'pathlib'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
