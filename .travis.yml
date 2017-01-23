@@ -12,7 +12,6 @@ env:
   - FLASK_VERSION=0.11
   - FLASK_VERSION=0.10.1
   - FLASK_VERSION=0.10
-  - FLASK_VERSION=0.9
 install:
   - pip install -q Flask==$FLASK_VERSION
   - pip install -q -r dev_requirements.txt
