@@ -1,10 +1,6 @@
 Welcome To DStore
 #################
 
-Build State
-.. image:: https://travis-ci.org/MarkLark/flask-dstore.svg?branch=master
-    :target: https://travis-ci.org/MarkLark/flask-dstore
-
 Flask-DStore is a Web API and Javascript Client.
 The API routes, logic and client code is automatically generated for you.
 
@@ -25,7 +21,9 @@ Minimal Example
 
 .. code-block:: python
 
+    from flask import Flask
     from dstore import MemoryStore, Model, var, mod
+    from flask_dstore import API
 
     class Car( Model ):
         _namespace = "cars.make"
@@ -36,18 +34,26 @@ Minimal Example
             var.Number( "year", mods = [ mod.NotNull(), mod.Min( 1950 ), mod.Max( 2017 ) ] ),
         ]
 
-    # Create the MemoryStore instance, and add Models to it
+    # Create the app instances
+    app = Flask( __name__ )
     store = MemoryStore( [ Car ] )
-    store.init_app()
-    store.connect()
-    store.create_all()
+    api = API( store, app )
 
-    # Destroy all instances and shut down the application
-    store.destroy_all()
-    store.disconnect()
+    # While inside the Flask app context, create all storage and add a car
+    with app.app_context():
+        store.create_all()
+        Car( manufacturer = "Holden", make = "Commodore", year = 2005 ).add()
+
+    # Run the Flask dev. server
+    app.run()
+
+    # Now destroy all data
+    with app.app_context():
+        store.destroy_all()
+
     store.destroy_app()
 
 
-Documentation: `ReadTheDocs <http://dstore.readthedocs.io/>`_
+Documentation: `ReadTheDocs <http://flask-dstore.readthedocs.io/>`_
 
-Source Code: `GitHub <https://github.com/MarkLark/dstore>`_
+Source Code: `GitHub <https://github.com/MarkLark/flask-dstore>`_
