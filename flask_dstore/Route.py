@@ -39,7 +39,7 @@ class Route( object ):
             elif request.method == "PATCH" : rtn, code = self.update( row_id )
             elif request.method == "DELETE": rtn, code = self.delete( row_id )
 
-        response = jsonify( rtn )
+        response = jsonify( items = rtn )
         response.status_code = code
         return response
 
