@@ -1,0 +1,6 @@
+nose
+coverage
+pyman
+tabulate
+dstore
+dstore-acl

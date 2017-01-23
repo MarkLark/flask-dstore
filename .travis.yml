@@ -1,0 +1,28 @@
+sudo: false
+language: python
+python:
+  - 2.7
+  - 3.2
+  - 3.3
+  - 3.4
+  - 3.5
+  - 3.6
+env:
+  - FLASK_VERSION=0.12
+  - FLASK_VERSION=0.11.2
+  - FLASK_VERSION=0.11.1
+  - FLASK_VERSION=0.11
+  - FLASK_VERSION=0.10.2
+  - FLASK_VERSION=0.10.1
+  - FLASK_VERSION=0.10
+  - FLASK_VERSION=0.9
+  - FLASK_VERSION=0.8.1
+  - FLASK_VERSION=0.8
+  - FLASK_VERSION=0.7.3
+  - FLASK_VERSION=0.7.2
+  - FLASK_VERSION=0.7.1
+  - FLASK_VERSION=0.7
+install:
+  - pip install -q -r dev_requirements.txt
+script:
+  - nosetests -vs tests
