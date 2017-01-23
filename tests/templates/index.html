@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DStore - Client Test</title>
+</head>
+<body onload="on_body_load()">
+
+{% include "car/form/test.html" %}
+
+<script src="/dstore-client.js"></script>
+<script src="/dstore-models.js"></script>
+<script src="/dstore-view.js"></script>
+
+<div id="div1">
+    <div id="div2">
+        <button id="btn1">Button 1</button>
+        <button id="btn2">Button 2</button>
+    </div>
+</div>
+
+<button id="btn3">Button 3</button>
+<button id="btn4">Button 4</button>
+
+{% include "car/table/car_table.html" %}
+
+<script>
+
+function on_body_load() {
+    DS.Manager.load_all();
+    DS.Manager.events.load_all.listen( load_all_success );
+    {% include "car/form/test_view.js" %}
+
+    {% include "car/table/car_table.js" %}
+}
+
+function load_all_success() {
+    console.log( "All Model data has been loaded" );
+}
+
+</script>
+</body>
+</html>
