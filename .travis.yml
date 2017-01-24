@@ -15,5 +15,8 @@ env:
 install:
   - pip install -q Flask==$FLASK_VERSION
   - pip install -q -r dev_requirements.txt
+  - pip install coveralls
 script:
-  - nosetests -vs tests
+  - nosetests -vs tests --with-coverage --cover-package=flask_dstore
+after_success:
+  - coveralls
