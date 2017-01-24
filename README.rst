@@ -1,6 +1,18 @@
 Welcome To DStore
 #################
 
+.. image:: https://img.shields.io/coveralls/MarkLark/flask-dstore.svg
+    :target: https://coveralls.io/github/MarkLark/flask-dstore?branch=master
+
+.. image:: https://img.shields.io/travis/MarkLark/flask-dstore/master.svg
+    :target: https://travis-ci.org/MarkLark/flask-dstore
+
+.. image:: https://img.shields.io/pypi/v/flask-dstore.svg
+    :target: https://pypi.python.org/pypi/flask-dstore
+
+.. image:: https://img.shields.io/pypi/pyversions/flask-dstore.svg
+    :target: https://pypi.python.org/pypi/flask-dstore
+
 Flask-DStore is a Web API and Javascript Client.
 The API routes, logic and client code is automatically generated for you.
 
