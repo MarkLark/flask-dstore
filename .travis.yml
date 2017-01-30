@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 language: python
 python:
   - 2.7
@@ -13,16 +13,23 @@ env:
   - FLASK_VERSION=0.10.1
   - FLASK_VERSION=0.10
 install:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  - sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+  - sudo apt-get update -q
+  - sudo apt-get install -q google-chrome-stable
+
   - pip install -q Flask==$FLASK_VERSION
   - pip install -q -r dev_requirements.txt
   - pip install coveralls
   - nvm install node
   - cd test_site/web && npm install && cd ../..
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+
 script:
   - nosetests -vs tests --with-coverage --cover-package=flask_dstore
-  - cd test_site/web && npm test && cd ../..
+  - cd test_site/web && npm run test-single-run && cd ../..
+  - cd test_site/web && (npm start > /dev/null &) && (npm run protractor) && cd ../..
 after_success:
   - coveralls
