@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
 if __name__ == '__main__':
-    from .tests.app import create_app
-    from .tests.models import Car
+    from tests.app import create_app
+    from tests.models import Car
     app, api = create_app( config = "tests.configs.server" )
 
-    with app.app_context( ):
+    with app.app_context():
         api.store.create_all()
 
         Car( manufacturer = "Holden", make = "Commodore", year = 2005 ).add()
