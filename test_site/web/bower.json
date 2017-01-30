@@ -1,8 +1,8 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
+  "name": "web",
+  "description": "A test site using Flask-DStore and Angular",
   "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
+  "homepage": "https://github.com/MarkLark/flask-dstore",
   "license": "MIT",
   "private": true,
   "dependencies": {
