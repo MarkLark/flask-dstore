@@ -30,7 +30,9 @@ install:
 
 script:
   - nosetests -vs tests --with-coverage --cover-package=flask_dstore
-  - cd test_site/web && npm run test-single-run && cd ../..
-  - cd test_site/web && (npm start > /dev/null &) && (npm run protractor) && cd ../..
+  - cd test_site/web
+  - npm run test-single-run
+  - (npm start > /dev/null &) && (npm run protractor)
+  - cd ../..
 after_success:
   - coveralls
