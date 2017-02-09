@@ -97,7 +97,7 @@ class Route( object ):
         A direct copy of flask.json.jsonify from Flask v0.12
 
         This is because Flask<=0.10 did not allow serializing top-level arrays.
-        Using this method still allows us to use Flask configs to control jsonfiy.
+        Using this method still allows us to use Flask configs to control jsonify.
         """
         from flask.json import dumps
         indent = None
