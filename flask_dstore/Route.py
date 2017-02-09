@@ -17,29 +17,37 @@ class Route( object ):
         self.api.blueprint.add_url_rule(
             self.url,
             self.rule_name,
-            self.dispatch_request,
+            self.dispatch_model,
             methods = [ "GET", "POST" ]
         )
 
         self.api.blueprint.add_url_rule(
             self.url + "<row_id>",
             self.rule_name + "_row",
-            self.dispatch_request,
+            self.dispatch_instance,
             methods = [ "GET", "POST", "PATCH", "DELETE" ]
         )
 
-    def dispatch_request( self, row_id = None ):
-        rtn = {}
-        code = 200
-        if row_id is None:
-            if   request.method == "GET"   : rtn, code = self.read_all()
-            elif request.method == "POST"  : rtn, code = self.add()
+    def dispatch_model( self ):
+        if   request.method == "GET" : rtn, code = self.read_all()
+        elif request.method == "POST": rtn, code = self.add()
         else:
-            if   request.method == "GET"   : rtn, code = self.read( row_id )
-            elif request.method == "PATCH" : rtn, code = self.update( row_id )
-            elif request.method == "DELETE": rtn, code = self.delete( row_id )
+            rtn = { "code": 405, "message": "Method %s %s not allowed" % ( request.method, request.path ) }
+            code = 405
 
-        response = Route.jsonify( rtn )
+        response = Route.jsonify(rtn)
+        response.status_code = code
+        return response
+
+    def dispatch_instance( self, row_id ):
+        if   request.method == "GET"   : rtn, code = self.read( row_id )
+        elif request.method == "PATCH" : rtn, code = self.update( row_id )
+        elif request.method == "DELETE": rtn, code = self.delete( row_id )
+        else:
+            rtn = {"code": 405, "message": "Method %s %s not allowed" % (request.method, request.path)}
+            code = 405
+
+        response = Route.jsonify(rtn)
         response.status_code = code
         return response
 
