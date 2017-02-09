@@ -10,7 +10,7 @@ with open( path.join( root_dir, 'README.rst' ), encoding = 'utf-8' ) as f:
 
 setup(
     name='Flask-DStore',
-    version='0.1.0a1',
+    version='0.1.1',
     url = 'https://github.com/MarkLark/flask-dstore',
     license='MIT',
     author='Mark Pittaway',
@@ -24,7 +24,7 @@ setup(
     install_requires=[
         'Flask>=0.10',
         'dstore>=0.1.1',
-        'dstore-acl',
+        'dstore-acl>=0.1.1',
         'pathlib'
     ],
     classifiers=[
