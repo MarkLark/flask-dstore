@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, current_app
 from dstore import Model
 from dstore.Error import ValidationError, InstanceNotFound
 
@@ -39,7 +39,7 @@ class Route( object ):
             elif request.method == "PATCH" : rtn, code = self.update( row_id )
             elif request.method == "DELETE": rtn, code = self.delete( row_id )
 
-        response = jsonify( items = rtn )
+        response = Route.jsonify( rtn )
         response.status_code = code
         return response
 
@@ -82,3 +82,31 @@ class Route( object ):
     def delete( self, row_id ):
         self.model( id = row_id ).delete()
         return {}, 200
+
+    @staticmethod
+    def jsonify( *args, **kwargs ):
+        """
+        A direct copy of flask.json.jsonify from Flask v0.12
+
+        This is because Flask<=0.10 did not allow serializing top-level arrays.
+        Using this method still allows us to use Flask configs to control jsonfiy.
+        """
+        from flask.json import dumps
+        indent = None
+        separators = (',', ':')
+
+        if current_app.config['JSONIFY_PRETTYPRINT_REGULAR'] and not request.is_xhr:
+            indent = 2
+            separators = (', ', ': ')
+
+        if args and kwargs:
+            raise TypeError('jsonify() behavior undefined when passed both args and kwargs')
+        elif len(args) == 1:  # single args are passed directly to dumps()
+            data = args[0]
+        else:
+            data = args or kwargs
+
+        return current_app.response_class(
+            (dumps(data, indent=indent, separators=separators), '\n'),
+            mimetype=current_app.config['JSONIFY_MIMETYPE']
+        )
