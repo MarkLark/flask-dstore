@@ -1,7 +1,5 @@
-from nose.tools import ok_, eq_, raises
 from . import BaseTest
 from .models import Car
-from flask import json
 
 
 class TestModelClient( BaseTest ):
