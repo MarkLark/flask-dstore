@@ -39,6 +39,7 @@ class API( object ):
 
     def init_app( self, app, store ):
         if not isinstance( store, Store ): raise RuntimeError( "API.store must be an instance of dstore.Store" )
+        app.config.setdefault('JSONIFY_MIMETYPE', 'application/json')
         self.store = store
         self.store.set_config( app.config )
         self.jsclient = JSClient( self, self.client_url, self.model_url )
