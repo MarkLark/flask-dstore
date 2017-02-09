@@ -23,7 +23,7 @@ setup(
     platforms='any',
     install_requires=[
         'Flask>=0.10',
-        'dstore',
+        'dstore>=0.1.1',
         'dstore-acl',
         'pathlib'
     ],
