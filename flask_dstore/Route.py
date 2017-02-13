@@ -79,7 +79,7 @@ class Route( object ):
         return instance.to_dict(), 200
 
     def read( self, row_id ):
-        return self.model.get( row_id ), 200
+        return self.model.get( row_id ).to_dict(), 200
 
     def read_all( self ):
         return self.model.all( to_dict = True ), 200
