@@ -10,9 +10,7 @@ python:
   - 3.6
 env:
   - FLASK_VERSION=0.12
-  - FLASK_VERSION=0.11.1
   - FLASK_VERSION=0.11
-  - FLASK_VERSION=0.10.1
   - FLASK_VERSION=0.10
 install:
   - export DISPLAY=:99.0
