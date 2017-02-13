@@ -43,6 +43,7 @@ menu = pyman.Main( "Flask-DStore - Manager", [
     pyman.PyPi(),
     pyman.NoseTest(),
     pyman.Git(),
+    pyman.Actions.Cmd("Install Package",  "sudo python setup.py develop"),
     pyman.Actions.Exit()
 ])
 menu.cli()
