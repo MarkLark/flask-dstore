@@ -41,6 +41,11 @@ class Route( object ):
         return response
 
     def dispatch_instance( self, row_id ):
+        try:
+            row_id = int( row_id )
+        except ValueError as e:
+            return { "code": 400, "message": "Invalid ID type supplied. Error: %s" % str( e ) }, 400
+
         if   request.method == "GET"   : rtn, code = self._process_request( self.read,   row_id )
         elif request.method == "PATCH" : rtn, code = self._process_request( self.update, row_id )
         elif request.method == "DELETE": rtn, code = self._process_request( self.delete, row_id )
@@ -74,11 +79,6 @@ class Route( object ):
         return instance.to_dict(), 200
 
     def read( self, row_id ):
-        try:
-            int( row_id )
-        except ValueError as e:
-            return { "code": 400, "message": "Invalid ID supplied. Error: %s" % str( e ) }, 400
-
         return self.model.get( row_id ), 200
 
     def read_all( self ):
