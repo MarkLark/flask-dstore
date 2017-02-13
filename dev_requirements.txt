@@ -4,4 +4,3 @@ pyman
 tabulate
 dstore
 dstore-acl
-pathlib
