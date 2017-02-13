@@ -64,6 +64,8 @@ class Route( object ):
             return { "code": 400, "type": "ValidationError", "message": str( e )}, 400
         except AccessDenied as e:
             return { "code": 403, "type": "AccessDenied", "message": str( e )}, 403
+        except InstanceNotFound as e:
+            return { "code": 404, "type": "InstanceNotFound", "message": str( e )}, 404
 
     def from_json( self, instance = None ):
         json = request.get_json()
@@ -82,7 +84,9 @@ class Route( object ):
         return self.model.get( row_id ).to_dict(), 200
 
     def read_all( self ):
-        return self.model.all( to_dict = True ), 200
+        json = request.get_json()
+        if json is None: return self.model.all( to_dict = True ), 200
+        else           : return self.model.filter( to_dict = True, **json ), 200
 
     def update( self, row_id ):
         instance = self.model.get( row_id )
